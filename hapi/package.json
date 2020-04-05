@@ -1,0 +1,25 @@
+{
+  "name": "hapi-test",
+  "version": "1.0.0",
+  "description": "Simple app to test working with hapi. Create a user, and authenticate as that user using basic auth.",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc & node ./build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/basic": "6.0.0",
+    "@hapi/boom": "9.1.0",
+    "@hapi/hapi": "19.1.1",
+    "@hapi/joi": "17.1.1",
+    "bcrypt": "4.0.1",
+    "config": "^3.3.1",
+    "postgres": "1.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "@types/config": "0.0.36"
+  }
+}

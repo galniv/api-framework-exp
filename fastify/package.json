@@ -1,0 +1,27 @@
+{
+  "name": "fastify-test",
+  "version": "1.0.0",
+  "description": "Simple app to test working with fastify. Create a user, and authenticate as that user using basic auth.",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node --files ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/config": "0.0.36",
+    "bcrypt": "4.0.1",
+    "config": "^3.3.1",
+    "fastify": "2.13.0",
+    "fastify-basic-auth": "0.5.0",
+    "fastify-plugin": "^1.6.1",
+    "postgres": "1.0.2",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "@types/config": "0.0.36"
+  }
+}
