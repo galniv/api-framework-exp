@@ -4,8 +4,14 @@
     "lib": [ "es5", "es6" ],
     "module": "commonjs",
     "target": "es6",
-    "sourceMap": true
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"]
+    },
+    "moduleResolution": "node"
   },
+  "include": ["./src/**/*.ts"],
   "exclude": [
     "node_modules"
   ]

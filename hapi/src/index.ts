@@ -6,8 +6,10 @@ const sql = require('./db');
 
 const server: Hapi.server = new Hapi.server({ host: config.server.host, port: config.server.port });
 
+server.method('sql', sql);
+
 const authenticate = async (request: Hapi.Request, email: string, password: string) => {
-    const selectResults = await sql`
+    const selectResults = await server.methods.sql`
         SELECT id, password
         FROM users
         WHERE email = ${ email }

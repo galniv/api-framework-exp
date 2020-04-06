@@ -2,12 +2,11 @@ import * as Hapi from '@hapi/hapi';
 import * as Joi from '@hapi/joi';
 import * as Boom from '@hapi/boom';
 import * as bcrypt from 'bcrypt';
-const sql = require('../db');
 const config = require('config');
 
 // Helpers.
 async function rejectExistingEmail(request: Hapi.Request, h:Hapi.ResponseToolKit) {
-    const userExists = await sql`
+    const userExists = await h.context.methods.sql`
         SELECT COUNT(email)
         FROM users
         WHERE email = ${ request.payload.email }
@@ -21,7 +20,7 @@ async function rejectExistingEmail(request: Hapi.Request, h:Hapi.ResponseToolKit
 };
 
 async function loadUserFromDb(request: Hapi.Request, h:Hapi.ResponseToolKit) {
-    const selectResult = await sql`
+    const selectResult = await h.context.methods.sql`
         SELECT id, name, email
         FROM users
         WHERE id = ${ request.auth.credentials.id }
@@ -45,7 +44,7 @@ async function createUser(request: Hapi.Request, h:Hapi.ResponseToolKit) {
     const body = request.payload;
     const hashedPassword = await bcrypt.hash(body.password, config.crypto.hashRounds);
     
-    const insertResult = await sql`
+    const insertResult = await h.context.methods.sql`
         INSERT INTO users (name, email, password)
         VALUES (${ body.name }, ${ body.email }, ${ hashedPassword })
         returning "id"
@@ -64,6 +63,7 @@ exports.plugin = {
             path: '/',
             handler: createUser,
             options: {
+                bind: server,
                 pre: [{ method: rejectExistingEmail }],
                 validate: {
                     failAction: (request, h, err) => {
@@ -83,6 +83,7 @@ exports.plugin = {
             path: '/',
             handler: getUser,
             options: {
+                bind: server,
                 auth: {
                     mode: 'required',
                     strategies: [ 'basic' ],
