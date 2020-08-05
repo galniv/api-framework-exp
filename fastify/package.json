@@ -13,7 +13,7 @@
     "@types/config": "0.0.36",
     "bcrypt": "4.0.1",
     "config": "^3.3.1",
-    "fastify": "2.13.0",
+    "fastify": "2.15.1",
     "fastify-basic-auth": "0.5.0",
     "fastify-plugin": "^1.6.1",
     "postgres": "1.0.2",
